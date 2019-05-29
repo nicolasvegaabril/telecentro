@@ -1,12 +1,12 @@
 window.addEventListener("load",inicio);
 
-class operador {
+class operador{
 	constructor(nombre,edad,mail){
 		this.nombre = nombre;
 		this.edad = edad;
 		this.mail = mail;
 	}
-	mostrarOperador() {
+	toString() {
 		return this.nombre + " " + this.edad + " " + this.mail;
 	}
 
@@ -24,28 +24,36 @@ class listado{
 	}
 }
 
-var listadoDeOperadores = new listado();
+let listadoDeOperadores = new listado();
 
 function inicio(){
-	document.getElementById("idBoton0").addEventListener("click",agregarOperador);
+	document.getElementById("idBotonAgregar").addEventListener("click",agregarOperador);
 }
 
 function agregarOperador(){
-	let nombre = document.getElementById("idNombre").value;
-	let edad = document.getElementById("idEdad").value;
-	let mail = document.getElementById("idMail").value;
-	listadoDeOperadores.agregar (new operador(nombre,edad,mail));
-	actualizar();
+	const nombreValido = document.getElementById("idNombre").checkValidity();
+	const edadValido = document.getElementById("idEdad").checkValidity();
+	const mailValido = document.getElementById("idMail").checkValidity();
+	const esValido = nombreValido && edadValido && mailValido;
+	if (esValido){
+		let nombre = document.getElementById("idNombre").value;
+		let edad = document.getElementById("idEdad").value;
+		let mail = document.getElementById("idMail").value;
+		listadoDeOperadores.agregar(new operador(nombre,edad,mail));
+		actualizar();
+		document.getElementById("formularioOperadores").reset();
+
+	}
 }
 
 function actualizar(){
-	document.getElementById("formularioOperadores").reset()
-	let lista = document.getElementById("lista");
+
+	let lista = document.getElementById("listaOp");
 	lista.innerHTML = "";
-	let datos = listadoDeOperadores.mostrarTodos();
-	for (elemento of datos){
-		let x = document.createElement("li");
-		let nodo = document.createElement(elemento);
+	let dato = listadoDeOperadores.mostrarTodos();
+	for (elemento of dato){
+		let x = document.createElement("LI");
+		let nodo = document.createTextNode(elemento);
 		x.appendChild(nodo);
 		lista.appendChild(x);
 	}
