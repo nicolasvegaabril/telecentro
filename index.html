@@ -28,18 +28,16 @@
 			<label for="idEdad">Edad: </label>
 			<input type="number" id="idEdad" placeholder="Edad" class="textBox" min="18" max="65" required>
 			<label for="idMail">Mail: </label>
-			<input type="text" id="idMail" placeholder="Mail" class="textBox" required>
-			<input type="button" id="idBoton0" value="Agregar" class="boton">
+			<input type="email" id="idMail" placeholder="Mail" class="textBox" required> <!--El tipo email verifica que sea valido por defecto-->
+			<input type="submit" id="idBotonAgregar" class="boton" value="Agregar">
 		</form>
 		<h3>Visualización de operadores</h3>
 		<label>Orden: </label>	
-		<input type="radio" name="ordenDatos" id="idRadioNombre" checked="">
+		<input type="radio" name="ordenDatos" id="idRadioNombre" checked>
 		<label for="idRadioNombre">Nombre</label>
 		<input type="radio" name="ordenDatos" id="idRadioEdad">
 		<label for="idRadioEdad">Edad</label>
-		<ul id="lista">
-			<li>Ana González 30 gonzalez@gmail.com</li>
-			<li>Luis Pérez 55 perezl@gmail.com</li>
+		<ul id="listaOp">
 		</ul>
 	</div>
 	<br>
