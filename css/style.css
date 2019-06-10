@@ -62,7 +62,7 @@ body {
 	background-color: #000000;
 }
 
-ul.navBar {
+nav {
   list-style-type: none;
   margin: 0;
   padding: 10;
@@ -70,12 +70,8 @@ ul.navBar {
   background-color: #000000;
 }
 
-li.navBar {
-  float: left;
-}
-
-li.navBar a {
-  display: block;
+nav a {
+  display: inline-block;
   color: white;
   text-align: center;
   padding: 10px 16px;
@@ -85,7 +81,7 @@ li.navBar a {
   margin:15px 5px;
 }
 
-li.navBar a:hover {
+nav a:hover {
   background-color: #00468c;
 }
 
