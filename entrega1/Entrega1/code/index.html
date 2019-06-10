@@ -1,4 +1,4 @@
-<!--Nicolas Vega 242166 / Daniel Toledo 245055 -->
+<!-- Nicolas Vega 242166 / Daniel Toledo 245055 M1E-->
 
 <!DOCTYPE html>
 <html lang="es">
@@ -44,20 +44,22 @@
 	<h2><a id="llamadas"></a>Manejo de Llamadas</h2>
 	<br>
 	<h3>Registro de Llamadas</h3>
-	<label for="idOperador">Operador: </label>
-	<select id="idOperador"  class="textBox">
-		<option value="anaGonzalez" selected>Ana González</option>
-		<option value="luisPerez">Luis Pérez</option>
-	</select>
-	<label for="idDescripcion">Descripción: </label>
-	<input type="text" id="idDescripcion" placeholder="Descripción" class="textBox">
-	<label for="idMotivo">Motivo: </label>
-	<input type="number" id="idMotivo" placeholder="1" class="textBox" min="1" max="6">
-	<label for="idDuracion">Duración: </label>
-	<input type="number" id="idDuracion" placeholder="1" class="textBox" min="1" max="60">
-	<label for="idCelular">Celular: </label>
-	<input type="text" id="idCelular" placeholder="Celular" class="textBox">
-	<input type="button" id="inBoton1" value="Agregar" class="boton">
+	<form id="formularioLlamadas" method="post">
+		<label for="idOperador">Operador: </label>
+		<select id="idOperador"  class="textBox">
+			<option value="anaGonzalez" selected>Ana González</option>
+			<option value="luisPerez">Luis Pérez</option>
+		</select>
+		<label for="idDescripcion">Descripción: </label>
+		<input type="text" id="idDescripcion" placeholder="Descripción" class="textBox" required>
+		<label for="idMotivo">Motivo: </label>
+		<input type="number" id="idMotivo" placeholder="1" class="textBox" min="1" max="6" required>
+		<label for="idDuracion">Duración: </label>
+		<input type="number" id="idDuracion" placeholder="1" class="textBox" min="1" max="60" required>
+		<label for="idCelular">Celular: </label>
+		<input type="text" id="idCelular" placeholder="Celular" class="textBox" required>
+		<input type="submit" id="inBoton1" value="Agregar" class="boton">
+	</form>
 	<h3>Muestra de Llamadas</h3>
 	<label>Orden: </label>	
 	<input type="radio" name="ordenLlamada" id="idRadioNumero" checked>
