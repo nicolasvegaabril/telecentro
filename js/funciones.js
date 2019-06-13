@@ -22,21 +22,50 @@ class listado{
 	mostrarTodos(){
 		return this.lista;
 	}
-	existeNombre(nombrePasado){
-		let esta = false;
-		for ( let elemento of this.mostrarTodos()){
-			if (elemento.nombre === nombrePasado){
-				esta = true;
-			}
-		}
-		return esta;
-	}
+	existeContactoNombre(nombre){
+	  	let esta = false;
+
+	  	for (let elem of this.mostrarTodos()){
+	  		if (elem.nombre === nombre){
+	  			esta = true;
+	  		}
+	  	}
+	  	return esta;
+ 	}
 }
 
 let listadoDeOperadores = new listado();
 
+var noEntro = true;
+
 function inicio(){
 	document.getElementById("idBotonAgregar").addEventListener("click",agregarOperador);
+}
+
+function agregarOperador(){
+	const nombreValido = document.getElementById("idNombre").checkValidity();
+	const edadValido = document.getElementById("idEdad").checkValidity();
+	const mailValido = document.getElementById("idMail").checkValidity();
+	const esValido = nombreValido && edadValido && mailValido;
+	let nombre = document.getElementById("idNombre").value;
+	if (esValido && noEntro){
+		let edad = document.getElementById("idEdad").value;
+		let mail = document.getElementById("idMail").value;
+		listadoDeOperadores.agregar(new operador(nombre,edad,mail));
+		actualizar();
+		document.getElementById("formularioOperadores").reset();
+		noEntro = false;
+	}else{
+		if (listadoDeOperadores.existeContactoNombre(nombre)){
+		alert("Nombre repetido");
+		actualizar();
+		}else{
+		let edad = document.getElementById("idEdad").value;
+		let mail = document.getElementById("idMail").value;
+		listadoDeOperadores.agregar(new operador(nombre,edad,mail));
+		actualizar();
+		document.getElementById("formularioOperadores").reset();}
+		}
 }
 
 function actualizar(){
@@ -50,26 +79,4 @@ function actualizar(){
 		lista.appendChild(x);
 	}
 }
-
-function agregarOperador(){
-	const nombreValido = document.getElementById("idNombre").checkValidity();
-	const edadValido = document.getElementById("idEdad").checkValidity();
-	const mailValido = document.getElementById("idMail").checkValidity();
-	const esValido = nombreValido && edadValido && mailValido;
-	let nombre = document.getElementById("idNombre").value;
-	alert("llega aca");
-	const yaExiste = listadoDeOperadores.existeNombre(nombre);
-	alert(yaExiste);
-	if (yaExiste == false){
-		if (esValido){
-		alert("entra");		
-			let edad = document.getElementById("idEdad").value;
-			let mail = document.getElementById("idMail").value;
-			listadoDeOperadores.agregar(new operador(nombre,edad,mail));
-			actualizar();
-			document.getElementById("formularioOperadores").reset();
-		}
-	}else { alert("Nombre repetido");}
-}
-
 
