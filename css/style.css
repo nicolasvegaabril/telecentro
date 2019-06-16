@@ -1,10 +1,6 @@
-.page {
-	margin-left: 30px;
-}
-
 .inPage {
 	border-style: solid;
-	margin: 10px 10px 0 0;
+	margin: 10px 10px 0 30px;
 	border-width: 1px;
 	width: 90%;
 	border-color: #e2e2e2;
@@ -14,32 +10,10 @@
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1); /*El ultimo numero es la saturacion del rgb, en este caso negro*/
 }
 
-br {
+br {              /*br mas pequeño*/
 	content: "";
 	display: block;
 	margin: 10px 0;
-}
-
-.volver {
-	display: block;
-	background-color: black;
-	color: white;
-	padding: 10px;
-	text-align: right;
-	text-decoration: none;
-	float: right;
-	margin: 0px 30px 30px 0px;
-}
-
-.volver:hover {
-	display: block;
-	background-color: darkgrey;
-	color: white;
-	padding: 10px;
-	text-align: right;
-	text-decoration: none;
-	float: right;
-	margin: 0px 30px 30px 0px;
 }
 
 h2 {
@@ -101,6 +75,10 @@ nav a:hover {
 	color: white;
 }
 
+.masLarga {
+	display: inline;
+}
+
 .textBox {
 	border-radius: 5px;
 	border: 1px solid; 
@@ -121,7 +99,6 @@ nav a:hover {
 	border: 1px solid; 
 }
 
-
 table {
   border-collapse: collapse;
   margin-top: 10px;
@@ -136,7 +113,42 @@ table, th, td {
 tr:nth-child(even) {    /*Tabla con filas de colores diferentes*/
 	background-color: #e5e5e5;
 }
+
 th {
 	background-color: #000000;
 	color: white;
+}
+ 
+.razon {
+	width: 30px;
+}
+
+.volver {
+	display: block;
+	background-color: black;
+	color: white;
+	padding: 10px;
+	border: solid black 1px;
+	border-radius: 20px;
+	text-align: right;
+	text-decoration: none;
+	float: right;
+	margin: 10px 30px 14px 0px;
+}
+.volver:hover {
+	display: block;
+	background-color: #00468c;
+	border-color: #00468c;
+	color: white;
+	padding: 10px;
+	text-align: right;
+	text-decoration: none;
+	float: right;
+}
+
+footer p{
+	background-color: #dddddd;
+	padding: 20px;
+	margin-bottom: 0px;
+	display: block;
 }
