@@ -16,11 +16,12 @@
 <a href="#llamadas">Llamadas</a> 
 <a href="#consultas">Consultas</a> 
 </nav>
+
 <section class="inPage"> <!--Operadores-->
 	<h2><a id="operadores"></a>Manejo de Operadores</h2>
 	<br>
 	<h3>Registro de operadores</h3>
-	<form id="formularioOperadores" method="post">
+	<form id="formularioOperadores" method="post" onsubmit="agregarOperador();return false;">
 		<label for="idNombre">Nombre: </label>
 		<input type="text" id="idNombre" placeholder="Nombre" class="textBox" maxlength="20" required>
 		<label for="idEdad">Edad: </label>
@@ -31,9 +32,9 @@
 	</form>
 	<h3>Visualización de operadores</h3>
 	<label>Orden: </label>	
-	<input type="radio" name="ordenDatos" id="idRadioNombre" checked>
+	<input type="radio" name="ordenDatos" id="idRadioNombre" checked onclick="actualizarPostOp()">
 	<label for="idRadioNombre">Nombre</label>
-	<input type="radio" name="ordenDatos" id="idRadioEdad">
+	<input type="radio" name="ordenDatos" id="idRadioEdad" onclick="actualizarPostOp()">
 	<label for="idRadioEdad">Edad</label>
 	<ul id="listaOp">
 	</ul>
@@ -43,11 +44,9 @@
 	<h2><a id="llamadas"></a>Manejo de Llamadas</h2>
 	<br>
 	<h3>Registro de Llamadas</h3>
-	<form id="formularioLlamadas" method="post">
+	<form id="formularioLlamadas" method="post" onsubmit="agregarLlamada();return false;">
 		<label for="idOperador">Operador: </label>
-		<select id="idOperador"  class="textBox">
-			<option value="anaGonzalez" selected>Ana González</option>
-			<option value="luisPerez">Luis Pérez</option>
+		<select id="idOperador" class="textBox">
 		</select>
 		<label for="idDescripcion">Descripción: </label>
 		<input type="text" id="idDescripcion" placeholder="Descripción" class="textBox" required>
@@ -56,7 +55,7 @@
 		<label for="idDuracion">Duración: </label>
 		<input type="number" id="idDuracion" placeholder="1" class="textBox" min="1" max="60" required>
 		<label for="idCelular">Celular: </label>
-		<input type="text" id="idCelular" placeholder="Celular" class="textBox" required>
+		<input type="tel" id="idCelular" placeholder="Celular" class="textBox" minlength="9" maxlength="9"  pattern="(09[1-9])[0-9]{6}" required>
 		<input type="submit" id="inBoton1" value="Agregar" class="boton">
 	</form>
 	<h3>Muestra de Llamadas</h3>
@@ -65,7 +64,7 @@
 	<label for="idRadioNumero">Número</label>
 	<input type="radio" name="ordenLlamada" id="idRadioNomNum">
 	<label for="idRadioNomNum">Nombre/Numero</label>
-	<table id="table1">
+	<table>
 		<thead>
 			<tr>
 			<th>NUMERO</th>
@@ -76,23 +75,8 @@
 			<th>CELULAR</th>
 		</tr>
 		</thead>
-		<tbody>
-			<tr>
-				<td>1</td>
-				<td>Ana González</td>
-				<td>No funciona bien</td>
-				<td><img src="img/3.png" class="razon" alt="3"> </td>
-				<td>15</td>
-				<td>091123123</td>
-			</tr>
-			<tr>
-				<td>2</td>
-				<td>Luis Pérez</td>
-				<td>Hace ruido</td>
-				<td><img src="img/3.png" class="razon" alt="3"> </td>
-				<td>13</td>
-				<td>095654123</td>
-			</tr>
+		<tbody id="tablaLlamadas">
+			
 		</tbody>
 	</table>
 </section>
