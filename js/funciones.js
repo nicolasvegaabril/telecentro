@@ -31,7 +31,7 @@ class listado{
 	}
 	agregar(nuevo){
 		this.lista.push(nuevo);
-		this.ordenacion();
+		//this.ordenacion();
 	}
 	mostrarTodos(){
 		return this.lista;
@@ -77,23 +77,23 @@ class listado{
 
 /* FUNCIONES */
 
-/*function agregarLLamada(){
+function agregarLLamada(){
 	const descValida = document.getElementById("idDescripcion").checkValidity();
 	const motivoValido = document.getElementById("idMotivo").checkValidity();
 	const duracionValida = document.getElementById("idDuracion").checkValidity();
 	const celularValido = document.getElementById("idCelular").checkValidity();
 	let esValido = descValida && motivoValido && duracionValida && celularValido;
-	//if (esValido){
+	if (esValido){
 		let operador = document.getElementById("idOperador").value;
 		let descripcion = document.getElementById("idDescripcion").value;
 		let motivo = document.getElementById("idMotivo").value;
 		let duracion = document.getElementById("idDuracion").value;
-		let celular = document.getElementById("idCelular").value;
+		let celular = document.getElementById("idCelular").value; //los datos los toma bien
 		listadoDeLlamadas.agregar(new llamadas(operador,descripcion,motivo,duracion,celular));
-		//actualizarLlam();
-		//document.getElementById("formularioLlamadas").reset();
-	//}
-}*/
+		actualizarLlam();
+		document.getElementById("formilarioLlamadas").reset();
+	}	
+}
 
 function agregarOperador(){
 	const nombreValido = document.getElementById("idNombre").checkValidity();
@@ -148,20 +148,42 @@ function actualizarOp(){ //Actualiza la lista de operadores
 	}
 }
 
-/*function actualizarLlam(){
+function actualizarLlam(){
 	let tabla = document.getElementById("tablaLlamadas");
 	tabla.innerHTML = "";
 	let dato = listadoDeLlamadas.mostrarTodos();
 	for (elemento of dato){
-		let x = document.createElement("TR");
-		for (elem of elemento){
-			let y = document.createElement("TD");
-			let nodo = document.createTextNode(elem)
-			y.appendChild(nodo);
-			x.appendChild(y);
+		let i = 1;
+		let newRow = tabla.insertRow(-1);
+		let newCell0 = newRow.insertCell(0);
+		let newText0 = document.createTextNode(i);
+		newCell0.appendChild(newText0);
+		let newCell1 = newRow.insertCell(1);
+		let newText1 = document.createTextNode(elemento.operador);
+		newCell1.appendChild(newText1);
+		let newCell2 = newRow.insertCell(2);
+		let newText2 = document.createTextNode(elemento.descripcion);
+		newCell2.appendChild(newText2);
+		let newCell3 = newRow.insertCell(3);
+		let newText3 = document.createTextNode(elemento.motivo);
+		newCell3.appendChild(newText3);
+		let newCell4 = newRow.insertCell(4);
+		let newText4 = document.createTextNode(elemento.duracion);
+		newCell4.appendChild(newText4);
+		let newCell5 = newRow.insertCell(5);
+		let newText5 = document.createTextNode(elemento.celular);
+		newCell5.appendChild(newText5);
+		i++;
 	}
-	}
-}*/
-/*let listadoDeLlamadas = new listado()*/
+}
+let listadoDeLlamadas = new listado()
 let listadoDeOperadores = new listado();
 var noEntro = true;
+
+
+
+
+
+//hacerse una array para mosrar los motivos que no atencdio en la parte 3
+//hacer toda la parte 3 dentro de un metodo SOLO. Dentro de la clase "telecentro" (listado)
+//
