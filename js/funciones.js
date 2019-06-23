@@ -31,7 +31,7 @@ class listado{
 	}
 	agregar(nuevo){
 		this.lista.push(nuevo);
-		//this.ordenacion();
+		this.ordenacion();
 	}
 	mostrarTodos(){
 		return this.lista;
@@ -112,8 +112,8 @@ function agregarOperador(){
 		if (listadoDeOperadores.existeContactoNombre(nombre) && esValido){
 		alert("El nombre ingresado es repetido");
 		actualizarOp();
-		document.getElementById("formularioOperadores").reset();}
-		else{
+		document.getElementById("formularioOperadores").reset();
+		}else{
 			if (esValido){
 				let edad = document.getElementById("idEdad").value;
 				let mail = document.getElementById("idMail").value;
@@ -153,7 +153,6 @@ function actualizarLlam(){
 	tabla.innerHTML = "";
 	let dato = listadoDeLlamadas.mostrarTodos();
 	for (elemento of dato){
-		let i = 1;
 		let newRow = tabla.insertRow(-1);
 		let newCell0 = newRow.insertCell(0);
 		let newText0 = document.createTextNode(i);
@@ -183,6 +182,30 @@ var noEntro = true;
 
 
 
+//poner las funciones de ordenacionn dentro de las clases especificas de cada uno
+//ejemplo de ordenacion mas facil
+//en telecentro
+/*var libro = new Libros();
+darTodos(){
+	return this.listaLibros;
+}
+darLibrosPorPaginas(){
+return this.listaLibros.sort(function(primero,segundo){return primero.porPaginas(segundo);});
+}
+darLibrosPorTitulo(){
+	return this.listaLibros.sort(function(primero,segundo){return primero.porTitulo(segundo);});
+}
+//en operador
+porPaginas(libro){
+	return this.paginas - libro.paginas;
+}
+porTitulo(libro){
+	return this.titulo.localeCompare(libro.titulo);
+}*/
+//
+//
+//
+//
 
 //hacerse una array para mosrar los motivos que no atencdio en la parte 3
 //hacer toda la parte 3 dentro de un metodo SOLO. Dentro de la clase "telecentro" (listado)
