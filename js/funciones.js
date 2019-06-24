@@ -31,7 +31,7 @@ class listado{
 	}
 	agregar(nuevo){
 		this.lista.push(nuevo);
-		this.ordenacion();
+		//this.ordenacion();
 	}
 	mostrarTodos(){
 		return this.lista;
@@ -91,7 +91,7 @@ function agregarLLamada(){
 		let celular = document.getElementById("idCelular").value; //los datos los toma bien
 		listadoDeLlamadas.agregar(new llamadas(operador,descripcion,motivo,duracion,celular));
 		actualizarLlam();
-		document.getElementById("formilarioLlamadas").reset();
+		//document.getElementById("formilarioLlamadas").reset();
 	}	
 }
 
@@ -153,9 +153,9 @@ function actualizarLlam(){
 	tabla.innerHTML = "";
 	let dato = listadoDeLlamadas.mostrarTodos();
 	for (elemento of dato){
-		let newRow = tabla.insertRow(-1);
+		let newRow = tabla.insertRow();
 		let newCell0 = newRow.insertCell(0);
-		let newText0 = document.createTextNode(i);
+		let newText0 = document.createTextNode(1);
 		newCell0.appendChild(newText0);
 		let newCell1 = newRow.insertCell(1);
 		let newText1 = document.createTextNode(elemento.operador);
@@ -172,7 +172,6 @@ function actualizarLlam(){
 		let newCell5 = newRow.insertCell(5);
 		let newText5 = document.createTextNode(elemento.celular);
 		newCell5.appendChild(newText5);
-		i++;
 	}
 }
 let listadoDeLlamadas = new listado()
