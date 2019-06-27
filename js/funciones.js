@@ -92,6 +92,33 @@ class telecentro{
  			this.ordenarPorNombreNumero();
  		}
  	}
+ 	motivos(oper){
+ 		let atendidos = []; 
+ 		let todos = [1,2,3,4,5,6];
+ 		for (let elem of this.mostrarTodos()){
+ 			if (elem.operador == oper){
+ 				if (atendidos.indexOf(parseInt(elem.motivo))<0){
+ 					atendidos.push(parseInt(elem.motivo));
+ 				}
+ 			}
+ 		} 
+ 		return todos.filter(k => !atendidos.includes(k));
+ 	} 
+ 	masLarga(oper){
+ 		let mayor = 0;
+ 		let indice = 0;
+ 		for (let elem of this.mostrarTodos()){
+ 			if (elem.operador == oper){
+ 				if (parseInt(elem.duracion)>mayor){
+ 					mayor = parseInt(elem.duracion);
+ 					indice = parseInt(elem.numero);
+ 				}
+ 			}
+ 		}
+ 		let resultado =  "Llamada mas larga: Número: " + indice + ", Duración: " + mayor + " minutos";
+ 		return resultado
+ 	}
+
 }
 
 /* FUNCIONES */
@@ -103,7 +130,14 @@ document.getElementById("idRadioNombre").addEventListener("click", actualizarPos
 document.getElementById("idRadioEdad").addEventListener("click", actualizarPostOp);
 document.getElementById("idRadioNumero").addEventListener("click", actualizarPostLlam);
 document.getElementById("idRadioNomNum").addEventListener("click", actualizarPostLlam);
+document.getElementById("idBoton2").addEventListener("click", historial);
 numero = 0;
+}
+
+function historial(){
+	let operador = document.getElementById("idOperador2").value
+	alert(listadoDeLlamadas.motivos(operador));
+	alert(listadoDeLlamadas.masLarga(operador));
 }
 
 function agregarLLamada(){
@@ -162,19 +196,26 @@ function actualizarPostOp(){   //Ordena operadores por nombre o edad luego de cr
 function actualizarOp(){ //Actualiza la lista de operadores
 	let lista = document.getElementById("listaOp");
 	let selection = document.getElementById("idOperador");
+	let selection2 = document.getElementById("idOperador2");
 	lista.innerHTML = "";
 	selection.innerHTML = "";
+	selection2.innerHTML = "";
 	let dato = listadoDeOperadores.mostrarTodos();
 	for (elemento of dato){
 		let x = document.createElement("LI");
 		let y = document.createElement("OPTION");
+		let z = document.createElement("OPTION");
 		let nodo = document.createTextNode(elemento);
 		let nodo2 = document.createTextNode(elemento.nombre);
+		let nodo3 = document.createTextNode(elemento.nombre);
 		y.setAttribute("value",elemento.nombre);
+		z.setAttribute("value",elemento.nombre);
 		x.appendChild(nodo);
 		y.appendChild(nodo2)
+		z.appendChild(nodo3)
 		lista.appendChild(x);
 		selection.appendChild(y);
+		selection2.appendChild(z);
 	}
 }
 
@@ -232,13 +273,14 @@ function actualizarLlam(){
 	}
 }
 
+//buscar los motivos de un operador
+
+
 
 
 let listadoDeLlamadas = new telecentro()
 let listadoDeOperadores = new telecentro();
 var noEntro = true;
-
-
 
 
 //poner las funciones de dentro de las clases especificas de cada uno
