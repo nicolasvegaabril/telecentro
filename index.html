@@ -32,9 +32,9 @@
 	</form>
 	<h3>Visualización de operadores</h3>
 	<label>Orden: </label>	
-	<input type="radio" name="ordenDatos" id="idRadioNombre" checked onclick="actualizarPostOp()">
+	<input type="radio" name="ordenDatos" id="idRadioNombre" checked >
 	<label for="idRadioNombre">Nombre</label>
-	<input type="radio" name="ordenDatos" id="idRadioEdad" onclick="actualizarPostOp()">
+	<input type="radio" name="ordenDatos" id="idRadioEdad" >
 	<label for="idRadioEdad">Edad</label>
 	<ul id="listaOp">
 	</ul>
@@ -46,7 +46,8 @@
 	<h3>Registro de Llamadas</h3>
 	<form id="formularioLlamadas" method="post" onsubmit="agregarLLamada();return false;">
 		<label for="idOperador">Operador: </label>
-		<select id="idOperador" class="textBox">
+		<select id="idOperador" class="textBox" required>
+			<option value="" class="valueInvisible"></option> <!--Necesario para poder usar el required en el select-->
 		</select>
 		<label for="idDescripcion">Descripción: </label>
 		<input type="text" id="idDescripcion" placeholder="Descripción" class="textBox" required>
