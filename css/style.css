@@ -119,6 +119,14 @@ th {
 	background-color: #000000;
 	color: white;
 }
+
+.optionInvisible{
+	display: none;
+}
+
+.imagenTabla{
+	max-height: 9%;
+}
  
 .razon {
 	width: 30px;
