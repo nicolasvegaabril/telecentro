@@ -9,10 +9,17 @@ class operador{
 	toString() {
 		return this.nombre + " " + this.edad + " " + this.mail;
 	}
+	porEdad(oper){
+	return this.edad - oper.edad;
+	}
+	porNombre(oper){
+	return this.nombre.localeCompare(oper.nombre);
+	}
 }
 
-class llamadas{
-	constructor(operador,descripcion,motivo,duracion,celular){
+class llamada{
+	constructor(numero,operador,descripcion,motivo,duracion,celular){
+		this.numero = numero
 		this.operador = operador;
 		this.descripcion = descripcion;
 		this.motivo = motivo;
@@ -20,18 +27,30 @@ class llamadas{
 		this.celular = celular;
 	}
 	toString() {
-		return this.operador + " " + this.descripcion + " " + this.motivo + " " + this.duracion + " " + this.celular;
+		return this.numero + " " + this.operador + " " + this.descripcion + " " + this.motivo + " " + this.duracion + " " + this.celular;
+	}
+	porNumero(llam){
+		return this.numero - llam.numero;
+	}
+	porNombreNumero(llam){
+		let n = this.operador.localeCompare(llam.operador);
+		if (n === 0){
+			this.porNumero(llam);
+		}else{return n}
 	}
 }
 
-
-class listado{
+class telecentro{
 	constructor(){
 		this.lista=[];
 	}
-	agregar(nuevo){
+	agregarOp(nuevo){
 		this.lista.push(nuevo);
-		//this.ordenacion();
+		this.ordenacion1();
+	}
+	agregarLi(nuevo){
+		this.lista.push(nuevo);
+		this.ordenacion2();
 	}
 	mostrarTodos(){
 		return this.lista;
@@ -45,37 +64,47 @@ class listado{
 	  	}
 	  	return esta;
  	}
- 	ordenacion(){
+ 	ordenarPorEdad(){
+		return this.lista.sort(function(primero,segundo){return primero.porEdad(segundo);});
+	}
+	ordenarPorNombre(){
+		return this.lista.sort(function(primero,segundo){return primero.porNombre(segundo);});
+	}
+	ordenarPorNumero(){
+		return this.lista.sort(function(primero,segundo){return primero.porNumero(segundo)})
+	}
+	ordenarPorNombreNumero(){
+		return this.lista.sort(function(primero,segundo){return primero.porNombreNumero(segundo)})
+	}
+ 	ordenacion1(){
  		if (document.getElementById("idRadioNombre").checked){
- 			this.lista.sort(listado.comparacionNombre);
+ 			this.ordenarPorNombre();
  		}
  		else{
- 			this.lista.sort(listado.comparacionEdad);
+ 			this.ordenarPorEdad();
  		}
  	}
- 	static comparacionNombre(primero, segundo){
- 		let retorno = 0
- 		if (primero.nombre.toUpperCase() < segundo.nombre.toUpperCase()){
- 			retorno= -1
+ 	ordenacion2(){
+ 		if (document.getElementById("idRadioNumero").checked){
+ 			this.ordenarPorNumero();
  		}
- 		if (primero.nombre.toUpperCase() > segundo.nombre.toUpperCase()){
- 			retorno= 1
+ 		else{
+ 			this.ordenarPorNombreNumero();
  		}
- 		return retorno;
- 	}
- 	static comparacionEdad(primero, segundo){
- 		let retorno = 0
- 		if (primero.edad < segundo.edad){
- 			retorno= -1
- 		}
- 		if (primero.edad > segundo.edad){
- 			retorno= 1
- 		}
- 		return retorno;
  	}
 }
 
 /* FUNCIONES */
+
+window.addEventListener('load', inicio);
+
+function inicio(){
+document.getElementById("idRadioNombre").addEventListener("click", actualizarPostOp);
+document.getElementById("idRadioEdad").addEventListener("click", actualizarPostOp);
+document.getElementById("idRadioNumero").addEventListener("click", actualizarPostLlam);
+document.getElementById("idRadioNomNum").addEventListener("click", actualizarPostLlam);
+numero = 0;
+}
 
 function agregarLLamada(){
 	const descValida = document.getElementById("idDescripcion").checkValidity();
@@ -84,14 +113,15 @@ function agregarLLamada(){
 	const celularValido = document.getElementById("idCelular").checkValidity();
 	let esValido = descValida && motivoValido && duracionValida && celularValido;
 	if (esValido){
+		numero = numero + 1;
 		let operador = document.getElementById("idOperador").value;
 		let descripcion = document.getElementById("idDescripcion").value;
 		let motivo = document.getElementById("idMotivo").value;
 		let duracion = document.getElementById("idDuracion").value;
 		let celular = document.getElementById("idCelular").value; //los datos los toma bien
-		listadoDeLlamadas.agregar(new llamadas(operador,descripcion,motivo,duracion,celular));
+		listadoDeLlamadas.agregarLi(new llamada(numero,operador,descripcion,motivo,duracion,celular));
 		actualizarLlam();
-		//document.getElementById("formilarioLlamadas").reset();
+		document.getElementById("formularioLlamadas").reset();
 	}	
 }
 
@@ -104,7 +134,7 @@ function agregarOperador(){
 	if (esValido && noEntro){
 		let edad = document.getElementById("idEdad").value;
 		let mail = document.getElementById("idMail").value;
-		listadoDeOperadores.agregar(new operador(nombre,edad,mail));
+		listadoDeOperadores.agregarOp(new operador(nombre,edad,mail));
 		actualizarOp();
 		document.getElementById("formularioOperadores").reset();
 		noEntro = false; //Si es el primer nombre ingresado no se compara
@@ -117,7 +147,7 @@ function agregarOperador(){
 			if (esValido){
 				let edad = document.getElementById("idEdad").value;
 				let mail = document.getElementById("idMail").value;
-				listadoDeOperadores.agregar(new operador(nombre,edad,mail));
+				listadoDeOperadores.agregarOp(new operador(nombre,edad,mail));
 				actualizarOp();
 				document.getElementById("formularioOperadores").reset();}
 			}
@@ -125,7 +155,7 @@ function agregarOperador(){
 }
 
 function actualizarPostOp(){   //Ordena operadores por nombre o edad luego de creada al lista, al presional el radio correspondiente
-	listadoDeOperadores.ordenacion();
+	listadoDeOperadores.ordenacion1();
 	actualizarOp();
 }
 
@@ -148,6 +178,11 @@ function actualizarOp(){ //Actualiza la lista de operadores
 	}
 }
 
+function actualizarPostLlam(){
+	listadoDeLlamadas.ordenacion2();
+	actualizarLlam();
+}
+
 function actualizarLlam(){
 	let tabla = document.getElementById("tablaLlamadas");
 	tabla.innerHTML = "";
@@ -155,7 +190,7 @@ function actualizarLlam(){
 	for (elemento of dato){
 		let newRow = tabla.insertRow();
 		let newCell0 = newRow.insertCell(0);
-		let newText0 = document.createTextNode(1);
+		let newText0 = document.createTextNode(elemento.numero);
 		newCell0.appendChild(newText0);
 		let newCell1 = newRow.insertCell(1);
 		let newText1 = document.createTextNode(elemento.operador);
@@ -164,8 +199,30 @@ function actualizarLlam(){
 		let newText2 = document.createTextNode(elemento.descripcion);
 		newCell2.appendChild(newText2);
 		let newCell3 = newRow.insertCell(3);
-		let newText3 = document.createTextNode(elemento.motivo);
-		newCell3.appendChild(newText3);
+		let img = document.createElement("img");
+		img.alt = elemento.motivo;
+		img.className = "imagenTabla";
+		switch (elemento.motivo){
+			case "1":
+				img.src = "img/1.png";
+			break;
+			case "2":
+				img.src = "img/2.png";
+			break;
+			case "3":
+				img.src = "img/3.png";
+			break;
+			case "4":
+				img.src = "img/4.png";
+			break;
+			case "5":
+				img.src = "img/5.png";
+			break;
+			case "6":
+				img.src = "img/6.png";
+			break;
+		}
+		newCell3.appendChild(img);
 		let newCell4 = newRow.insertCell(4);
 		let newText4 = document.createTextNode(elemento.duracion);
 		newCell4.appendChild(newText4);
@@ -174,38 +231,17 @@ function actualizarLlam(){
 		newCell5.appendChild(newText5);
 	}
 }
-let listadoDeLlamadas = new listado()
-let listadoDeOperadores = new listado();
+
+
+
+let listadoDeLlamadas = new telecentro()
+let listadoDeOperadores = new telecentro();
 var noEntro = true;
 
 
 
 
-//poner las funciones de ordenacionn dentro de las clases especificas de cada uno
-//ejemplo de ordenacion mas facil
-//en telecentro
-/*var libro = new Libros();
-darTodos(){
-	return this.listaLibros;
-}
-darLibrosPorPaginas(){
-return this.listaLibros.sort(function(primero,segundo){return primero.porPaginas(segundo);});
-}
-darLibrosPorTitulo(){
-	return this.listaLibros.sort(function(primero,segundo){return primero.porTitulo(segundo);});
-}
-//en operador
-porPaginas(libro){
-	return this.paginas - libro.paginas;
-}
-porTitulo(libro){
-	return this.titulo.localeCompare(libro.titulo);
-}*/
-//
-//
-//
-//
-
+//poner las funciones de dentro de las clases especificas de cada uno
 //hacerse una array para mosrar los motivos que no atencdio en la parte 3
 //hacer toda la parte 3 dentro de un metodo SOLO. Dentro de la clase "telecentro" (listado)
 //
