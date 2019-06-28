@@ -75,10 +75,6 @@ nav a:hover {
 	color: white;
 }
 
-.masLarga {
-	display: inline;
-}
-
 .textBox {
 	border-radius: 5px;
 	border: 1px solid; 
@@ -111,6 +107,10 @@ table, th, td {
 	padding: 15px;
 }
 
+.inline{
+display: inline-block;
+}
+
 tr:nth-child(even) {    /*Tabla con filas de colores diferentes*/
 	background-color: #e5e5e5;
 }
@@ -120,12 +120,9 @@ th {
 	color: white;
 }
 
-.optionInvisible{
-	display: none;
-}
-
 .imagenTabla{
-	max-height: 9%;
+	max-height: 30px;
+	display: inline-block;
 }
  
 .razon {
