@@ -102,7 +102,22 @@ class telecentro{
  				}
  			}
  		} 
- 		return todos.filter(k => !atendidos.includes(k));
+ 		let noAtendidos = todos.filter(k => !atendidos.includes(k));
+ 		if (noAtendidos.length>0){
+	 		let x = document.getElementById("idIconos");
+	 		let label = document.createElement("P");
+	 		let nodo = document.createTextNode("Motivos no atendio: ");
+	 		label.appendChild(nodo);
+	 		x.appendChild(label);
+	 		for (let motiv of noAtendidos){
+	 			let img = document.createElement("img");
+	 			img.alt = motiv;
+				img.className = "imagenTabla";
+				alert(noAtendidos);
+				img.src = mostrarIcono(motiv.toString());
+				x.appendChild(img);
+	 		}
+ 	}
  	} 
  	masLarga(oper){
  		let mayor = 0;
@@ -117,6 +132,17 @@ class telecentro{
  		}
  		let resultado =  "Llamada mas larga: Número: " + indice + ", Duración: " + mayor + " minutos";
  		return resultado
+ 	}
+ 	promedio(oper){
+ 		let suma = 0;
+ 		let cantidad = 0; 
+ 		for (let elem of this.mostrarTodos()){
+ 			if (elem.operador == oper){
+ 				suma += parseInt(elem.duracion);
+ 				cantidad++;
+ 			}
+ 		} 
+ 		return "Tiempo promedio de atencion: " + suma/cantidad + " minutos";
  	}
 
 }
@@ -136,8 +162,17 @@ numero = 0;
 
 function historial(){
 	let operador = document.getElementById("idOperador2").value
-	alert(listadoDeLlamadas.motivos(operador));
-	alert(listadoDeLlamadas.masLarga(operador));
+	listadoDeLlamadas.motivos(operador);
+	let x = document.getElementById("idMasLarga");
+	let y = document.getElementById("idPromedio");
+	x.innerHTML = "";
+	y.innerHTML = "";
+	nodo1 = document.createTextNode(listadoDeLlamadas.masLarga(operador));
+	nodo2 = document.createTextNode(listadoDeLlamadas.promedio(operador));
+	x.appendChild(nodo1);
+	y.appendChild(nodo2);
+
+
 }
 
 function agregarLLamada(){
@@ -243,26 +278,7 @@ function actualizarLlam(){
 		let img = document.createElement("img");
 		img.alt = elemento.motivo;
 		img.className = "imagenTabla";
-		switch (elemento.motivo){
-			case "1":
-				img.src = "img/1.png";
-			break;
-			case "2":
-				img.src = "img/2.png";
-			break;
-			case "3":
-				img.src = "img/3.png";
-			break;
-			case "4":
-				img.src = "img/4.png";
-			break;
-			case "5":
-				img.src = "img/5.png";
-			break;
-			case "6":
-				img.src = "img/6.png";
-			break;
-		}
+		img.src = mostrarIcono(elemento.motivo);
 		newCell3.appendChild(img);
 		let newCell4 = newRow.insertCell(4);
 		let newText4 = document.createTextNode(elemento.duracion);
@@ -273,6 +289,29 @@ function actualizarLlam(){
 	}
 }
 
+function mostrarIcono(numero){
+	let src
+	switch (numero){
+			case "1":
+				src = "img/1.png";
+			break;
+			case "2":
+				src = "img/2.png";
+			break;
+			case "3":
+				src = "img/3.png";
+			break;
+			case "4":
+				src = "img/4.png";
+			break;
+			case "5":
+				src = "img/5.png";
+			break;
+			case "6":
+				src = "img/6.png";
+			break;
+		} return src
+}
 //buscar los motivos de un operador
 
 
