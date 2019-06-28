@@ -47,7 +47,6 @@
 	<form id="formularioLlamadas" method="post" onsubmit="agregarLLamada();return false;">
 		<label for="idOperador">Operador: </label>
 		<select id="idOperador" class="textBox" required>
-			<option value="" class="valueInvisible"></option> <!--Necesario para poder usar el required en el select-->
 		</select>
 		<label for="idDescripcion">Descripción: </label>
 		<input type="text" id="idDescripcion" placeholder="Descripción" class="textBox" required>
@@ -86,24 +85,14 @@
 	<h3>Consulta por operador</h3>
 	<label for="idOperador2">Operador: </label>
 	<select id="idOperador2" class="textBox" required>
-		<option value=""></option>
-		
 	</select>
 	<input type="button" id="idBoton2" value="Consultar historia" class="boton">
 	<br>
-	<label>Motivos no atendio: </label>
-	<img src="img/1.png" class="razon" alt="1">
-	<img src="img/2.png" class="razon" alt="2">
-	<img src="img/3.png" class="razon" alt="3">
-	<img src="img/4.png" class="razon" alt="4">
-	<img src="img/5.png" class="razon" alt="5">
-	<img src="img/6.png" class="razon" alt="6">
-	<br>
-	<p class="masLarga">Llamada mas larga: </p>
-	<p class="masLarga">Numero 1 Duracion 15</p>
-	<br>
-	<p class="masLarga">Tiempo promedio de atencio: </p>
-	<p class="masLarga">15</p>
+	<div id="idIconos">
+	</div>
+	<div id=idTexto>
+	<p id="idMasLarga"></p>
+	<p id="idPromedio"></p>
 	<br>
 	<h3>Consulta por llamadas</h3>
 	<label>Duracion: </label>
