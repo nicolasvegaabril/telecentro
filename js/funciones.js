@@ -105,6 +105,7 @@ class telecentro{
  		let noAtendidos = todos.filter(k => !atendidos.includes(k));
  		if (noAtendidos.length>0){
 	 		let x = document.getElementById("idIconos");
+	 		x.innerHTML = "";
 	 		let label = document.createElement("P");
 	 		let nodo = document.createTextNode("Motivos no atendio: ");
 	 		label.appendChild(nodo);
@@ -113,7 +114,6 @@ class telecentro{
 	 			let img = document.createElement("img");
 	 			img.alt = motiv;
 				img.className = "imagenTabla";
-				alert(noAtendidos);
 				img.src = mostrarIcono(motiv.toString());
 				x.appendChild(img);
 	 		}
@@ -144,7 +144,26 @@ class telecentro{
  		} 
  		return "Tiempo promedio de atencion: " + suma/cantidad + " minutos";
  	}
-
+ 	porDuracion(dur,x){
+ 		let coincidencias = [];
+ 		for (let elem of this.mostrarTodos()){
+ 			if ((elem.duracion == dur)&&(coincidencias.includes(elem.operador)==false)){
+ 				coincidencias.push(elem.operador);
+ 			} 
+ 		}
+ 		for (let element of coincidencias){
+ 			let nodo = document.createElement("LI");
+ 			let texto = document.createTextNode(element);
+ 			nodo.appendChild(texto);
+ 			x.appendChild(nodo);
+ 		}
+ 	}
+ 	contienePalabras(texto){
+ 		let palabras = texto.split(" ");
+ 		for (elem of this.mostrarTodos()){
+ 			elem.descripcion.split(" ")
+ 		}
+ 	}
 }
 
 /* FUNCIONES */
@@ -157,7 +176,14 @@ document.getElementById("idRadioEdad").addEventListener("click", actualizarPostO
 document.getElementById("idRadioNumero").addEventListener("click", actualizarPostLlam);
 document.getElementById("idRadioNomNum").addEventListener("click", actualizarPostLlam);
 document.getElementById("idBoton2").addEventListener("click", historial);
+document.getElementById("idBoton3").addEventListener("click", porLargo);
 numero = 0;
+}
+
+function porLargo(){
+let x = document.getElementById("idListaDuracion");
+let dur = document.getElementById("idDuracionLlamadas").value;
+listadoDeLlamadas.porDuracion(dur,x);
 }
 
 function historial(){
