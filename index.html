@@ -9,7 +9,20 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
 </head>
 <body> 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="js/funciones.js"></script>
+<script type="text/javascript">
+	// Load the Visualization API and the corechart package.
+google.charts.load('current', {'packages':['corechart']});
+
+// Set a callback to run when the Google Visualization API is loaded.
+
+
+// Callback that creates and populates a data table,
+// instantiates the pie chart, passes in the data and
+// draws it.
+
+</script>
 <nav>
 <img src="img/logo.png" class="logo" alt="Logo"> 
 <a href="#operadores">Operadores</a> 
@@ -114,19 +127,12 @@
 			<th>CELULAR</th>
 		</tr>
 		</thead>
-		<tbody>
-			<tr>
-				<td>2</td>
-				<td>Luis Pérez</td>
-				<td>Hace ruido</td>
-				<td><img src="img/3.png" class="razon" alt="3"></td>
-				<td>13</td>
-				<td>095654123</td>
-			</tr>
+		<tbody id="tablaLlamadas2">
 		</tbody>
 	</table>
 	<br>
-	<input type="button" id="idBoton5" value="Distribución de llamadas" class="boton">
+	<input type="button" id="idBoton5" value="Distribución de llamadas" class="boton" >
+	<div id="chart_div"></div>
 </section>
 <br>
 <a class="volver" href="#top">Volver arriba</a>
