@@ -117,7 +117,7 @@ class telecentro{
 				img.src = mostrarIcono(motiv.toString());
 				x.appendChild(img);
 	 		}
- 	}
+ 		}
  	} 
  	masLarga(oper){
  		let mayor = 0;
@@ -159,9 +159,42 @@ class telecentro{
  		}
  	}
  	contienePalabras(texto){
+ 		let tabla = document.getElementById("tablaLlamadas2");
+ 		tabla.innerHTML = "";
  		let palabras = texto.split(" ");
- 		for (elem of this.mostrarTodos()){
- 			elem.descripcion.split(" ")
+ 		for (let elem of this.mostrarTodos()){
+ 			let coincidentes = [];
+ 			let desc = elem.descripcion.split(" ");	
+ 			for (let i=0;i<palabras.length;i++){
+ 				if (desc.indexOf(palabras[i])>=0){
+ 					coincidentes.push(palabras[i]);
+ 				}
+ 			}
+ 			if (coincidentes.length > (palabras.length/2)){
+ 				let elemento = elem;
+					let newRow = tabla.insertRow();
+					let newCell0 = newRow.insertCell(0);
+					let newText0 = document.createTextNode(elemento.numero);
+					newCell0.appendChild(newText0);
+					let newCell1 = newRow.insertCell(1);
+					let newText1 = document.createTextNode(elemento.operador);
+					newCell1.appendChild(newText1);
+					let newCell2 = newRow.insertCell(2);
+					let newText2 = document.createTextNode(elemento.descripcion);
+					newCell2.appendChild(newText2);
+					let newCell3 = newRow.insertCell(3);
+					let img = document.createElement("img");
+					img.alt = elemento.motivo;
+					img.className = "imagenTabla";
+					img.src = mostrarIcono(elemento.motivo);
+					newCell3.appendChild(img);
+					let newCell4 = newRow.insertCell(4);
+					let newText4 = document.createTextNode(elemento.duracion);
+					newCell4.appendChild(newText4);
+					let newCell5 = newRow.insertCell(5);
+					let newText5 = document.createTextNode(elemento.celular);
+					newCell5.appendChild(newText5);	
+ 			}
  		}
  	}
 }
@@ -177,7 +210,14 @@ document.getElementById("idRadioNumero").addEventListener("click", actualizarPos
 document.getElementById("idRadioNomNum").addEventListener("click", actualizarPostLlam);
 document.getElementById("idBoton2").addEventListener("click", historial);
 document.getElementById("idBoton3").addEventListener("click", porLargo);
+document.getElementById("idBoton4").addEventListener("click", contiene);
+document.getElementById("idBoton5").addEventListener("click", llamadasPorOperador);
 numero = 0;
+}
+
+function contiene(){
+let texto = document.getElementById("idPalabra").value;
+listadoDeLlamadas.contienePalabras(texto);
 }
 
 function porLargo(){
@@ -215,7 +255,7 @@ function agregarLLamada(){
 		let duracion = document.getElementById("idDuracion").value;
 		let celular = document.getElementById("idCelular").value; //los datos los toma bien
 		listadoDeLlamadas.agregarLi(new llamada(numero,operador,descripcion,motivo,duracion,celular));
-		actualizarLlam();
+		actualizarLlam(listadoDeLlamadas.mostrarTodos(),document.getElementById("tablaLlamadas"));
 		document.getElementById("formularioLlamadas").reset();
 	}	
 }
@@ -282,14 +322,12 @@ function actualizarOp(){ //Actualiza la lista de operadores
 
 function actualizarPostLlam(){
 	listadoDeLlamadas.ordenacion2();
-	actualizarLlam();
+	actualizarLlam(listadoDeLlamadas.mostrarTodos(),document.getElementById("tablaLlamadas"));
 }
 
-function actualizarLlam(){
-	let tabla = document.getElementById("tablaLlamadas");
+function actualizarLlam(agregar,tabla){
 	tabla.innerHTML = "";
-	let dato = listadoDeLlamadas.mostrarTodos();
-	for (elemento of dato){
+	for (elemento of agregar){
 		let newRow = tabla.insertRow();
 		let newCell0 = newRow.insertCell(0);
 		let newText0 = document.createTextNode(elemento.numero);
@@ -338,17 +376,50 @@ function mostrarIcono(numero){
 			break;
 		} return src
 }
-//buscar los motivos de un operador
-
-
-
 
 let listadoDeLlamadas = new telecentro()
 let listadoDeOperadores = new telecentro();
 var noEntro = true;
 
 
-//poner las funciones de dentro de las clases especificas de cada uno
-//hacerse una array para mosrar los motivos que no atencdio en la parte 3
-//hacer toda la parte 3 dentro de un metodo SOLO. Dentro de la clase "telecentro" (listado)
-//
+function drawChart(element,contador) {
+	// Create the data table.
+	var data = new google.visualization.DataTable();
+	data.addColumn('string', 'Operador');
+	data.addColumn('number', 'Llamadas');
+
+	data.addRows([
+	  [element, contador],
+	]);
+
+	// Set chart options
+	var options = {'title':'Distribucion de llamadas',
+	               'width':400,
+	               'height':300};
+
+	// Instantiate and draw our chart, passing in some options.
+	var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+	chart.draw(data, options);
+}
+
+function llamadasPorOperador(){
+	let operadores = [];
+	for (let elem of listadoDeLlamadas.mostrarTodos()){
+			operadores.push(elem.operador);
+	}
+	let operadoresUnicos = [];
+	for (let elemento of operadores){
+		if (operadoresUnicos.indexOf(elemento)<0){
+			operadoresUnicos.push(elemento)
+		}
+	}
+	let contador = 0;
+	for (let element of operadoresUnicos){
+		for (let x of operadores){
+			if (element == x){
+				contador ++;
+			}
+		}
+		drawChart(element,contador);
+	}
+}
