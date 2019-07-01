@@ -9,12 +9,10 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
 </head>
 <body> 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="js/clases.js"></script>
 <script src="js/funciones.js"></script>
-<script type="text/javascript">
-google.charts.load('current', {'packages':['corechart']});
-</script>
+<script>google.charts.load('current', {'packages':['corechart']});</script>
 <nav>
 <img src="img/logo.png" class="logo" alt="Logo"> 
 <a href="#operadores">Operadores</a> 
@@ -52,6 +50,7 @@ google.charts.load('current', {'packages':['corechart']});
 	<form id="formularioLlamadas" method="post" onsubmit="agregarLLamada();return false;">
 		<label for="idOperador">Operador: </label>
 		<select id="idOperador" class="textBox" required>
+			<option class="incognito" value="" label="operador"></option>
 		</select>
 		<label for="idDescripcion">Descripción: </label>
 		<input type="text" id="idDescripcion" placeholder="Descripción" class="textBox" required>
@@ -90,6 +89,7 @@ google.charts.load('current', {'packages':['corechart']});
 	<h3>Consulta por operador</h3>
 	<label for="idOperador2">Operador: </label>
 	<select id="idOperador2" class="textBox" required>
+		<option class="incognito" value="" label="operador"></option>
 	</select>
 	<input type="button" id="idBoton2" value="Consultar historia" class="boton">
 	<br>
@@ -98,6 +98,7 @@ google.charts.load('current', {'packages':['corechart']});
 	<div id=idTexto>
 	<p id="idMasLarga"></p>
 	<p id="idPromedio"></p>
+	</div>
 	<br>
 	<h3>Consulta por llamadas</h3>
 	<label>Duracion: </label>
