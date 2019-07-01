@@ -1,4 +1,4 @@
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 480px) { /*para pantallas de ancho menor o igual a 480px*/
 
 .inPage {
 	border-style: solid;
@@ -10,12 +10,6 @@
 	padding: 10px 30px;
 	background-color: #ffffff;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1); /*El ultimo numero es la saturacion del rgb, en este caso negro*/
-}
-
-br {              /*br mas pequeño*/
-	content: "";
-	display: block;
-	margin: 10px 0;
 }
 
 body {
@@ -165,6 +159,9 @@ footer p{
 	padding: 20px;
 	margin-bottom: 0px;
 	display: block;
+}
+.incognito{
+	display: none;
 }
 }
 
@@ -329,5 +326,9 @@ footer p{
 	padding: 20px;
 	margin-bottom: 0px;
 	display: block;
+}
+
+.incognito{
+	display: none;
 }
 }
