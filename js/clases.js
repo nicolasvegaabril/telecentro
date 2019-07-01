@@ -152,12 +152,14 @@ class telecentro{
  				coincidencias.push(elem.operador);
  			} 
  		}
- 		for (let element of coincidencias){
- 			let nodo = document.createElement("LI");
- 			let texto = document.createTextNode(element);
- 			nodo.appendChild(texto);
- 			x.appendChild(nodo);
- 		}
+ 		if (coincidencias.length > 0){
+	 		for (let element of coincidencias){
+	 			let nodo = document.createElement("LI");
+	 			let texto = document.createTextNode(element);
+	 			nodo.appendChild(texto);
+	 			x.appendChild(nodo);
+	 		}
+	 	}else{ alert("No existen llamadas con esa duracion")}
  	}
  	contienePalabras(texto){
  		let tabla = document.getElementById("tablaLlamadas2");
@@ -195,7 +197,7 @@ class telecentro{
 					let newCell5 = newRow.insertCell(5);
 					let newText5 = document.createTextNode(elemento.celular);
 					newCell5.appendChild(newText5);	
- 			}
+ 			}else{alert("No existen llamadas que coincidan con las palabras ingresadas")}
  		}
  	}
 }

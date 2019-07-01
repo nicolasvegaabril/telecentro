@@ -23,21 +23,23 @@ listadoDeLlamadas.contienePalabras(texto);
 
 function porLargo(){
 let x = document.getElementById("idListaDuracion");
-let dur = document.getElementById("idDuracionLlamadas").value;
+let dur = parseInt(document.getElementById("idDuracionLlamadas").value);
 listadoDeLlamadas.porDuracion(dur,x);
 }
 
 function historial(){
-	let operador = document.getElementById("idOperador2").value
-	listadoDeLlamadas.motivos(operador);
-	let x = document.getElementById("idMasLarga");
-	let y = document.getElementById("idPromedio");
-	x.innerHTML = "";
-	y.innerHTML = "";
-	nodo1 = document.createTextNode(listadoDeLlamadas.masLarga(operador));
-	nodo2 = document.createTextNode(listadoDeLlamadas.promedio(operador));
-	x.appendChild(nodo1);
-	y.appendChild(nodo2);
+	if (listadoDeLlamadas.mostrarTodos().length != 0){
+		let operador = document.getElementById("idOperador2").value
+		listadoDeLlamadas.motivos(operador);
+		let x = document.getElementById("idMasLarga");
+		let y = document.getElementById("idPromedio");
+		x.innerHTML = "";
+		y.innerHTML = "";
+		nodo1 = document.createTextNode(listadoDeLlamadas.masLarga(operador));
+		nodo2 = document.createTextNode(listadoDeLlamadas.promedio(operador));
+		x.appendChild(nodo1);
+		y.appendChild(nodo2);
+	}else{alert("No hay llamadas registradas para ese operador")}
 }
 
 function agregarLLamada(){
