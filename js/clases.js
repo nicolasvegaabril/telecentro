@@ -1,4 +1,4 @@
-/*    CLASES      */
+//Nicolas Vega 242166 / Daniel Toledo 245055 M1E
 
 class operador{
 	constructor(nombre,edad,mail){
@@ -58,7 +58,7 @@ class telecentro{
 	existeContactoNombre(nombre){
 	  	let esta = false;
 	  	for (let elem of this.mostrarTodos()){
-	  		if (elem.nombre === nombre){
+	  		if (elem.nombre.toUpperCase() === nombre.toUpperCase()){
 	  			esta = true;
 	  		}
 	  	}
@@ -117,7 +117,14 @@ class telecentro{
 				img.src = mostrarIcono(motiv.toString());
 				x.appendChild(img);
 	 		}
- 		}
+ 		}else{
+ 			let x = document.getElementById("idIconos");
+	 		x.innerHTML = "";
+	 		let label = document.createElement("P");
+	 		let nodo = document.createTextNode("El operador atendio todos los motivos");
+	 		label.appendChild(nodo);
+	 		x.appendChild(label);
+	 	}
  	} 
  	masLarga(oper){
  		let mayor = 0;
@@ -142,7 +149,7 @@ class telecentro{
  				cantidad++;
  			}
  		} 
- 		return "Tiempo promedio de atencion: " + suma/cantidad + " minutos";
+ 		return "Tiempo promedio de atencion: " + (suma/cantidad).toFixed(2) + " minutos";
  	}
  	porDuracion(dur,x){
  		let coincidencias = [];
@@ -197,7 +204,10 @@ class telecentro{
 					let newCell5 = newRow.insertCell(5);
 					let newText5 = document.createTextNode(elemento.celular);
 					newCell5.appendChild(newText5);	
- 			}else{alert("No existen llamadas que coincidan con las palabras ingresadas")}
+ 			}else{var loContiene = false}
+ 		}
+ 		if (!loContiene){
+ 			alert("No existen llamadas que coincidan con las palabras ingresadas")
  		}
  	}
 }

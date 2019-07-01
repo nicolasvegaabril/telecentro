@@ -1,8 +1,11 @@
+//Nicolas Vega 242166 / Daniel Toledo 245055 M1E
+
 window.addEventListener('load', inicio);
 
 let listadoDeLlamadas = new telecentro()
 let listadoDeOperadores = new telecentro();
 var noEntro = true;
+var yaDibuja = false;
 
 function inicio(){
 document.getElementById("idRadioNombre").addEventListener("click", actualizarPostOp);
@@ -152,6 +155,9 @@ function actualizarLlam(agregar,tabla){
 		let newText5 = document.createTextNode(elemento.celular);
 		newCell5.appendChild(newText5);
 	}
+	if (yaDibuja){
+		drawChart();
+	}
 }
 
 function mostrarIcono(numero){
@@ -179,6 +185,7 @@ function mostrarIcono(numero){
 }
 
 function drawChart() {
+	yaDibuja = true;
 	let operadores = [];
 	for (let elem of listadoDeLlamadas.mostrarTodos()){
 			operadores.push(elem.operador);
