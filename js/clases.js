@@ -169,6 +169,7 @@ class telecentro{
 	 	}else{ alert("No existen llamadas con esa duracion")}
  	}
  	contienePalabras(texto){
+ 		var loContiene = true;
  		let tabla = document.getElementById("tablaLlamadas2");
  		tabla.innerHTML = "";
  		let palabras = texto.split(" ");
@@ -204,7 +205,7 @@ class telecentro{
 					let newCell5 = newRow.insertCell(5);
 					let newText5 = document.createTextNode(elemento.celular);
 					newCell5.appendChild(newText5);	
- 			}else{var loContiene = false}
+ 			}else{loContiene = false}
  		}
  		if (!loContiene){
  			alert("No existen llamadas que coincidan con las palabras ingresadas")
