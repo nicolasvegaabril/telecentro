@@ -1,207 +1,8 @@
-/*    CLASES      */
-
-class operador{
-	constructor(nombre,edad,mail){
-		this.nombre = nombre;
-		this.edad = edad;
-		this.mail = mail;
-	}
-	toString() {
-		return this.nombre + " " + this.edad + " " + this.mail;
-	}
-	porEdad(oper){
-	return this.edad - oper.edad;
-	}
-	porNombre(oper){
-	return this.nombre.localeCompare(oper.nombre);
-	}
-}
-
-class llamada{
-	constructor(numero,operador,descripcion,motivo,duracion,celular){
-		this.numero = numero
-		this.operador = operador;
-		this.descripcion = descripcion;
-		this.motivo = motivo;
-		this.duracion = duracion;
-		this.celular = celular;
-	}
-	toString() {
-		return this.numero + " " + this.operador + " " + this.descripcion + " " + this.motivo + " " + this.duracion + " " + this.celular;
-	}
-	porNumero(llam){
-		return this.numero - llam.numero;
-	}
-	porNombreNumero(llam){
-		let n = this.operador.localeCompare(llam.operador);
-		if (n === 0){
-			this.porNumero(llam);
-		}else{return n}
-	}
-}
-
-class telecentro{
-	constructor(){
-		this.lista=[];
-	}
-	agregarOp(nuevo){
-		this.lista.push(nuevo);
-		this.ordenacion1();
-	}
-	agregarLi(nuevo){
-		this.lista.push(nuevo);
-		this.ordenacion2();
-	}
-	mostrarTodos(){
-		return this.lista;
-	}
-	existeContactoNombre(nombre){
-	  	let esta = false;
-	  	for (let elem of this.mostrarTodos()){
-	  		if (elem.nombre === nombre){
-	  			esta = true;
-	  		}
-	  	}
-	  	return esta;
- 	}
- 	ordenarPorEdad(){
-		return this.lista.sort(function(primero,segundo){return primero.porEdad(segundo);});
-	}
-	ordenarPorNombre(){
-		return this.lista.sort(function(primero,segundo){return primero.porNombre(segundo);});
-	}
-	ordenarPorNumero(){
-		return this.lista.sort(function(primero,segundo){return primero.porNumero(segundo)})
-	}
-	ordenarPorNombreNumero(){
-		return this.lista.sort(function(primero,segundo){return primero.porNombreNumero(segundo)})
-	}
- 	ordenacion1(){
- 		if (document.getElementById("idRadioNombre").checked){
- 			this.ordenarPorNombre();
- 		}
- 		else{
- 			this.ordenarPorEdad();
- 		}
- 	}
- 	ordenacion2(){
- 		if (document.getElementById("idRadioNumero").checked){
- 			this.ordenarPorNumero();
- 		}
- 		else{
- 			this.ordenarPorNombreNumero();
- 		}
- 	}
- 	motivos(oper){
- 		let atendidos = []; 
- 		let todos = [1,2,3,4,5,6];
- 		for (let elem of this.mostrarTodos()){
- 			if (elem.operador == oper){
- 				if (atendidos.indexOf(parseInt(elem.motivo))<0){
- 					atendidos.push(parseInt(elem.motivo));
- 				}
- 			}
- 		} 
- 		let noAtendidos = todos.filter(k => !atendidos.includes(k));
- 		if (noAtendidos.length>0){
-	 		let x = document.getElementById("idIconos");
-	 		x.innerHTML = "";
-	 		let label = document.createElement("P");
-	 		let nodo = document.createTextNode("Motivos no atendio: ");
-	 		label.appendChild(nodo);
-	 		x.appendChild(label);
-	 		for (let motiv of noAtendidos){
-	 			let img = document.createElement("img");
-	 			img.alt = motiv;
-				img.className = "imagenTabla";
-				img.src = mostrarIcono(motiv.toString());
-				x.appendChild(img);
-	 		}
- 		}
- 	} 
- 	masLarga(oper){
- 		let mayor = 0;
- 		let indice = 0;
- 		for (let elem of this.mostrarTodos()){
- 			if (elem.operador == oper){
- 				if (parseInt(elem.duracion)>mayor){
- 					mayor = parseInt(elem.duracion);
- 					indice = parseInt(elem.numero);
- 				}
- 			}
- 		}
- 		let resultado =  "Llamada mas larga: Número: " + indice + ", Duración: " + mayor + " minutos";
- 		return resultado
- 	}
- 	promedio(oper){
- 		let suma = 0;
- 		let cantidad = 0; 
- 		for (let elem of this.mostrarTodos()){
- 			if (elem.operador == oper){
- 				suma += parseInt(elem.duracion);
- 				cantidad++;
- 			}
- 		} 
- 		return "Tiempo promedio de atencion: " + suma/cantidad + " minutos";
- 	}
- 	porDuracion(dur,x){
- 		let coincidencias = [];
- 		for (let elem of this.mostrarTodos()){
- 			if ((elem.duracion == dur)&&(coincidencias.includes(elem.operador)==false)){
- 				coincidencias.push(elem.operador);
- 			} 
- 		}
- 		for (let element of coincidencias){
- 			let nodo = document.createElement("LI");
- 			let texto = document.createTextNode(element);
- 			nodo.appendChild(texto);
- 			x.appendChild(nodo);
- 		}
- 	}
- 	contienePalabras(texto){
- 		let tabla = document.getElementById("tablaLlamadas2");
- 		tabla.innerHTML = "";
- 		let palabras = texto.split(" ");
- 		for (let elem of this.mostrarTodos()){
- 			let coincidentes = [];
- 			let desc = elem.descripcion.split(" ");	
- 			for (let i=0;i<palabras.length;i++){
- 				if (desc.indexOf(palabras[i])>=0){
- 					coincidentes.push(palabras[i]);
- 				}
- 			}
- 			if (coincidentes.length > (palabras.length/2)){
- 				let elemento = elem;
-					let newRow = tabla.insertRow();
-					let newCell0 = newRow.insertCell(0);
-					let newText0 = document.createTextNode(elemento.numero);
-					newCell0.appendChild(newText0);
-					let newCell1 = newRow.insertCell(1);
-					let newText1 = document.createTextNode(elemento.operador);
-					newCell1.appendChild(newText1);
-					let newCell2 = newRow.insertCell(2);
-					let newText2 = document.createTextNode(elemento.descripcion);
-					newCell2.appendChild(newText2);
-					let newCell3 = newRow.insertCell(3);
-					let img = document.createElement("img");
-					img.alt = elemento.motivo;
-					img.className = "imagenTabla";
-					img.src = mostrarIcono(elemento.motivo);
-					newCell3.appendChild(img);
-					let newCell4 = newRow.insertCell(4);
-					let newText4 = document.createTextNode(elemento.duracion);
-					newCell4.appendChild(newText4);
-					let newCell5 = newRow.insertCell(5);
-					let newText5 = document.createTextNode(elemento.celular);
-					newCell5.appendChild(newText5);	
- 			}
- 		}
- 	}
-}
-
-/* FUNCIONES */
-
 window.addEventListener('load', inicio);
+
+let listadoDeLlamadas = new telecentro()
+let listadoDeOperadores = new telecentro();
+var noEntro = true;
 
 function inicio(){
 document.getElementById("idRadioNombre").addEventListener("click", actualizarPostOp);
@@ -211,7 +12,7 @@ document.getElementById("idRadioNomNum").addEventListener("click", actualizarPos
 document.getElementById("idBoton2").addEventListener("click", historial);
 document.getElementById("idBoton3").addEventListener("click", porLargo);
 document.getElementById("idBoton4").addEventListener("click", contiene);
-document.getElementById("idBoton5").addEventListener("click", llamadasPorOperador);
+document.getElementById("idBoton5").addEventListener("click", drawChart);
 numero = 0;
 }
 
@@ -237,8 +38,6 @@ function historial(){
 	nodo2 = document.createTextNode(listadoDeLlamadas.promedio(operador));
 	x.appendChild(nodo1);
 	y.appendChild(nodo2);
-
-
 }
 
 function agregarLLamada(){
@@ -285,11 +84,11 @@ function agregarOperador(){
 				listadoDeOperadores.agregarOp(new operador(nombre,edad,mail));
 				actualizarOp();
 				document.getElementById("formularioOperadores").reset();}
-			}
 		}
+	}
 }
 
-function actualizarPostOp(){   //Ordena operadores por nombre o edad luego de creada al lista, al presional el radio correspondiente
+function actualizarPostOp(){ //Ordena operadores por nombre o edad luego de creada al lista, al presional el radio correspondiente
 	listadoDeOperadores.ordenacion1();
 	actualizarOp();
 }
@@ -354,7 +153,7 @@ function actualizarLlam(agregar,tabla){
 }
 
 function mostrarIcono(numero){
-	let src
+	let src = "";
 	switch (numero){
 			case "1":
 				src = "img/1.png";
@@ -377,32 +176,7 @@ function mostrarIcono(numero){
 		} return src
 }
 
-let listadoDeLlamadas = new telecentro()
-let listadoDeOperadores = new telecentro();
-var noEntro = true;
-
-
-function drawChart(element,contador) {
-	// Create the data table.
-	var data = new google.visualization.DataTable();
-	data.addColumn('string', 'Operador');
-	data.addColumn('number', 'Llamadas');
-
-	data.addRows([
-	  [element, contador],
-	]);
-
-	// Set chart options
-	var options = {'title':'Distribucion de llamadas',
-	               'width':400,
-	               'height':300};
-
-	// Instantiate and draw our chart, passing in some options.
-	var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-	chart.draw(data, options);
-}
-
-function llamadasPorOperador(){
+function drawChart() {
 	let operadores = [];
 	for (let elem of listadoDeLlamadas.mostrarTodos()){
 			operadores.push(elem.operador);
@@ -413,13 +187,25 @@ function llamadasPorOperador(){
 			operadoresUnicos.push(elemento)
 		}
 	}
-	let contador = 0;
+	var data = new google.visualization.DataTable();
+	data.addColumn('string', 'Operador');
+	data.addColumn('number', 'Llamadas');
 	for (let element of operadoresUnicos){
+		let contador = 0;
 		for (let x of operadores){
 			if (element == x){
 				contador ++;
 			}
 		}
-		drawChart(element,contador);
+		data.addRows([
+			[element, contador],
+		]);
 	}
+	
+	var options = {'title':'Distribucion de llamadas',
+					is3D: true,
+	               'width':400,
+	               'height':300};
+	var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+	chart.draw(data, options);
 }
