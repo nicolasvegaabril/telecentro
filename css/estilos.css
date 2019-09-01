@@ -1,189 +1,13 @@
-/*Nicolas Vega 242166 / Daniel Toledo 245055 M1E*/
-
-@media only screen and (max-width: 480px) { /*para pantallas de ancho menor o igual a 480px*/
-
 .inPage {
 	border-style: solid;
 	margin: 10px 10px 0 30px;
 	border-width: 1px;
-	width: 90%;
+	width: 90vw;
 	border-color: #e2e2e2;
 	border-radius: 10px;
-	padding: 10px 30px;
+	padding: 1vh 3vw;
 	background-color: #ffffff;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1); /*El ultimo numero es la saturacion del rgb, en este caso negro*/
-}
-
-body {
-background-color: #fcfcfc;
-margin: 0;
-font-family: 'Roboto Condensed', sans-serif;
-}
-
-br {              /*br mas pequeño*/
-content: "";
-display: block;
-margin: 10px 0;
-}
-
-h2 {
-	text-decoration: underline;
-}
-
-.logo{
-    float: left;
-    position: relative;
-    height: 69px;
-    width: 69px; 
-    padding-left: 10px;
-	background-color: #305796;
-}
-
-nav {
-  list-style-type: none;
-  margin: 0;
-  padding: 10;
-  overflow: hidden;
-  background-color: #305796;
-}
-
-nav a {
-  display: inline-block;
-  color: white;
-  text-align: center;
-  padding: 10px 16px;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 20px;
-  margin:15px 5px;
-}
-
-nav a:hover {
-  background-color: #00468c;
-}
-
-.boton {
-	padding: 5px 9px;
-	border-radius: 5px;
-	border: hidden;
-	background-color: #305796;
-	color: white;
-}
-
-.boton:hover {
-	padding: 5px 9px;
-	border-radius: 5px;
-	border: hidden;
-	background-color: #00468c;
-	color: white;
-}
-
-.textBox {
-	border-radius: 5px;
-	border: 1px solid; 
-	border-color: #e2e2e2;
-	padding: 5px;
-	margin-right: 10px;
-}
-
-.textBox:hover {
-	border-radius: 5px;
-	border: 1px solid; 
-	border-color: #969696;
-	box-shadow: 0 0 5px #e2efff inset;
-}
-
-.textBox:focus {
-	border-radius: 5px;
-	border: 1px solid; 
-}
-
-
-table {
-  border-collapse: collapse;
-  margin-top: 10px;
-  width: 50%;
-}
-
-table, th, td {
-	border: 1px solid black;
-	text-align: center;
-	padding: 15px;
-}
-
-.inline{
-display: inline-block;
-}
-
-tr:nth-child(even) {    /*Tabla con filas de colores diferentes*/
-	background-color: #e5e5e5;
-}
-
-th {
-	background-color: #305796;
-	color: white;
-}
-
-.imagenTabla{
-	max-height: 30px;
-	display: inline-block;
-}
- 
-.razon {
-	width: 30px;
-}
-
-.volver {
-	display: block;
-	background-color: black;
-	color: white;
-	padding: 10px;
-	border: solid black 1px;
-	border-radius: 20px;
-	text-align: right;
-	text-decoration: none;
-	float: right;
-	margin: 10px 30px 14px 0px;
-}
-.volver:hover {
-	display: block;
-	background-color: #00468c;
-	border-color: #00468c;
-	color: white;
-	padding: 10px;
-	text-align: right;
-	text-decoration: none;
-	float: right;
-}
-
-footer p{
-	background-color: #dddddd;
-	padding: 20px;
-	margin-bottom: 0px;
-	display: block;
-}
-.incognito{
-	display: none;
-}
-}
-
-@media only screen and (min-width: 481px) {
-.inPage {
-	border-style: solid;
-	margin: 10px 10px 0 30px;
-	border-width: 1px;
-	width: 90%;
-	border-color: #e2e2e2;
-	border-radius: 10px;
-	padding: 10px 30px;
-	background-color: #ffffff;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1); /*El ultimo numero es la saturacion del rgb, en este caso negro*/
-}
-
-br {              /*br mas pequeño*/
-	content: "";
-	display: block;
-	margin: 10px 0;
 }
 
 h2 {
@@ -194,7 +18,6 @@ body {
 	margin: 0;
 	background-color: #fcfcfc;
 	font-family: 'Roboto Condensed', sans-serif;
-	
 }
 
 .logo{
@@ -269,7 +92,7 @@ nav a:hover {
 table {
   border-collapse: collapse;
   margin-top: 10px;
-  width: 50%;
+  width: 50vw;
 }
 
 table, th, td {
@@ -300,8 +123,10 @@ th {
 	width: 30px;
 }
 
-.volver {
-	display: block;
+.volver { 
+	position: fixed;
+bottom: 20px;
+right: 10px;
 	background-color: black;
 	color: white;
 	padding: 10px;
@@ -309,18 +134,17 @@ th {
 	border-radius: 20px;
 	text-align: right;
 	text-decoration: none;
-	float: right;
 	margin: 10px 30px 14px 0px;
 }
+
 .volver:hover {
-	display: block;
-	background-color: #00468c;
-	border-color: #00468c;
-	color: white;
-	padding: 10px;
-	text-align: right;
-	text-decoration: none;
-	float: right;
+	background-color: #00468c;	
+}
+
+footer {
+	padding-top: 2vh;
+  bottom: 0;
+  width: 100%;
 }
 
 footer p{
@@ -332,5 +156,4 @@ footer p{
 
 .incognito{
 	display: none;
-}
 }
