@@ -1,4 +1,4 @@
-Un Telecentro de una importante empresa de electrodomésticos recibe llamadas de usuarios sobre diversos
+   Un Telecentro de una importante empresa de electrodomésticos recibe llamadas de usuarios sobre diversos
 motivos. Cada llamada es atendida por un operador y se registra en el sistema. Se solicita diseñar una única página
 web que permita gestionar los operadores, llamadas y hacer consultas.
 Se debe poder:
